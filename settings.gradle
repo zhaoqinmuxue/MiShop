@@ -1,0 +1,2 @@
+include ':example', ':aoli-annotations', ':aoli-compiler', ':aoli-core', ':aoli-ec'
+rootProject.name='MiShop'
