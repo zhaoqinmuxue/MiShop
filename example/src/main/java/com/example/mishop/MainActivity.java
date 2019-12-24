@@ -1,14 +1,16 @@
 package com.example.mishop;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.annotation.Nullable;
+
+import com.example.aoli_core.activities.ProxyActivity;
+import com.example.aoli_core.delegates.AoliDelegate;
+
+public class MainActivity extends ProxyActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public AoliDelegate setRootDelegate() {
+        return new ExampleDelegate();
     }
 }
