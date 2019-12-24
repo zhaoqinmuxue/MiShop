@@ -12,7 +12,7 @@ public class ExampleApp extends Application {
         Aoli.init(this)
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
-                .withApiHost("http://www.baidu.com")
+                .withApiHost("http://127.0.0.1")
                 .configure();
     }
 }
