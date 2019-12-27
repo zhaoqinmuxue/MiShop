@@ -29,10 +29,11 @@ public abstract class BaseDelegate extends Fragment {
             rootView = inflater.inflate((Integer) setLayout(),container,false);
         }else if (setLayout() instanceof View){
             rootView = (View) setLayout();
+        }else{
+            throw new ClassCastException("type of setLayout() must be int or View!");
         }
-        if (rootView != null){
-            mUnbinder = ButterKnife.bind(this,rootView);
-        }
+        mUnbinder = ButterKnife.bind(this,rootView);
+        onBindView(savedInstanceState,rootView);
         return rootView;
     }
 
