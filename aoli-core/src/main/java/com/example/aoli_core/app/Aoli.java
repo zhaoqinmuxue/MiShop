@@ -6,15 +6,19 @@ import java.util.HashMap;
 
 public final class Aoli {
     public static Configurator init(Context context){
-        getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(),context.getApplicationContext());
+        getConfigurations().put(ConfigType.APPLICATION_CONTEXT,context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String,Object> getConfigurations(){
+    private static HashMap<ConfigType,Object> getConfigurations(){
         return Configurator.getInstance().getAoliConfigs();
     }
 
+    public static <T> T getConfiguration(ConfigType type){
+        return (T)getConfigurations().get(type);
+    }
+
     public static Context getApplicationContext(){
-        return (Context) getConfigurations().get(ConfigType.APPLICATION_CONTEXT.name());
+        return (Context) getConfiguration(ConfigType.APPLICATION_CONTEXT);
     }
 }

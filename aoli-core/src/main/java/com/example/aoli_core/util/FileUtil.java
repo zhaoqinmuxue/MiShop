@@ -3,12 +3,16 @@ package com.example.aoli_core.util;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
 
+import com.example.aoli_core.app.Aoli;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -58,32 +62,32 @@ public class FileUtil {
 
     public static File writeToDisk(InputStream in,String dir,String name){
         final File file = createFile(dir,name);
-        BufferedInputStream bin = null;
-        BufferedOutputStream bout = null;
-        FileOutputStream fout = null;
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
         try {
-            bin = new BufferedInputStream(in);
-            fout = new FileOutputStream(file);
-            bout = new BufferedOutputStream(fout);
+            bis = new BufferedInputStream(in);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
             byte data[] = new byte[1024 * 4];
             int count;
-            while ((count = bin.read(data)) != -1){
-                bout.write(data,0,count);
+            while ((count = bis.read(data)) != -1){
+                bos.write(data,0,count);
             }
-            bout.flush();
-            fout.flush();
+            bos.flush();
+            fos.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
             try {
-                if (bin != null){
-                    bin.close();
+                if (bis != null){
+                    bis.close();
                 }
-                if (bout != null){
-                    bout.close();
+                if (bos != null){
+                    bos.close();
                 }
-                if (fout != null){
-                    fout.close();
+                if (fos != null){
+                    fos.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -94,5 +98,29 @@ public class FileUtil {
 
     public static File writeToDisk(InputStream in,String dir,String prefix,String extension){
         return writeToDisk(in,dir,getFileNameByTime(prefix,extension));
+    }
+
+    public static String getRawFile(int id) {
+        final InputStream is = Aoli.getApplicationContext().getResources().openRawResource(id);
+        final InputStreamReader isr = new InputStreamReader(is);
+        final BufferedReader br = new BufferedReader(isr);
+        final StringBuilder stringBuilder = new StringBuilder();
+        String str;
+        try {
+            while ((str = br.readLine()) != null) {
+                stringBuilder.append(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+                isr.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return stringBuilder.toString();
     }
 }

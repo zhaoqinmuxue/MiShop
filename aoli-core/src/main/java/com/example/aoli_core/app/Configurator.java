@@ -7,13 +7,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Configurator {
-    private static final HashMap<String,Object> AOLI_CONFIGS = new HashMap<>();
+import okhttp3.Interceptor;
 
+public class Configurator {
+
+    private static final HashMap<ConfigType,Object> AOLI_CONFIGS = new HashMap<>();
     private static List<IconFontDescriptor> ICONS = new ArrayList<>();
+    private static List<Interceptor> INTERCEPTORS = new ArrayList<>();
 
     private Configurator(){
-        AOLI_CONFIGS.put(ConfigType.CONFIG_READY.name(),false);
+        AOLI_CONFIGS.put(ConfigType.CONFIG_READY,false);
     }
 
     public static Configurator getInstance(){
@@ -24,17 +27,18 @@ public class Configurator {
         private static final Configurator INSTANCE = new Configurator();
     }
 
-    final HashMap<String,Object> getAoliConfigs(){
+    final HashMap<ConfigType,Object> getAoliConfigs(){
         return AOLI_CONFIGS;
     }
 
     public void configure(){
         initIcons();
-        AOLI_CONFIGS.put(ConfigType.CONFIG_READY.name(),true);
+        AOLI_CONFIGS.put(ConfigType.ICON,ICONS);
+        AOLI_CONFIGS.put(ConfigType.CONFIG_READY,true);
     }
 
     public final Configurator withApiHost(String host){
-        AOLI_CONFIGS.put(ConfigType.API_HOST.name(),host);
+        AOLI_CONFIGS.put(ConfigType.API_HOST,host);
         return this;
     }
 
@@ -52,6 +56,18 @@ public class Configurator {
         return this;
     }
 
+    public final Configurator withInterceptor(Interceptor interceptor){
+        INTERCEPTORS.add(interceptor);
+        AOLI_CONFIGS.put(ConfigType.INTERCEPTOR,INTERCEPTORS);
+        return this;
+    }
+
+    public final Configurator withInterceptors(List<Interceptor> interceptors){
+        INTERCEPTORS.addAll(interceptors);
+        AOLI_CONFIGS.put(ConfigType.INTERCEPTOR,INTERCEPTORS);
+        return this;
+    }
+
     private void checkConfiguration(){
         final boolean isReady = (boolean)AOLI_CONFIGS.get(ConfigType.CONFIG_READY.name());
         if (!isReady){
@@ -61,6 +77,6 @@ public class Configurator {
 
     final <T> T getConfiguration(ConfigType key){
         checkConfiguration();
-        return (T)AOLI_CONFIGS.get(key);
+        return (T)AOLI_CONFIGS.get(key.name());
     }
 }
