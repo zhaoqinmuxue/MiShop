@@ -1,10 +1,8 @@
 package com.example.aoli_core.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 

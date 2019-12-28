@@ -1,5 +1,6 @@
 package com.example.aoli_core.delegates;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -3,7 +3,7 @@ package com.example.mishop;
 import android.app.Application;
 import com.example.aoli_core.app.Aoli;
 import com.example.aoli_core.net.interceptors.DebugInterceptor;
-import com.example.aoli_ec.FontEcModule;
+import com.example.aoli_ec.icon.FontEcModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 
 public class ExampleApp extends Application {

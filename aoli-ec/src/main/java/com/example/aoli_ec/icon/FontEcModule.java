@@ -1,4 +1,4 @@
-package com.example.aoli_ec;
+package com.example.aoli_ec.icon;
 
 import com.joanzapata.iconify.Icon;
 import com.joanzapata.iconify.IconFontDescriptor;
