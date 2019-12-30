@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.aoli_core.app.AccountManager;
+import com.example.aoli_core.app.IUserChecker;
 import com.example.aoli_core.delegates.AoliDelegate;
 import com.example.aoli_core.util.PreferenceUtil;
 import com.example.aoli_core.util.timer.BaseTimerTask;
@@ -76,7 +78,23 @@ public class LauncherDelegate extends AoliDelegate implements ITimeListener {
                     .replace(R.id.delegate_container,new LauncherScrollDelegate())
                     .commit();
         }else{
+            AccountManager.checkAccount(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (getActivity() != null && getActivity() instanceof ILauncherListener){
+                        ILauncherListener launcherListener = (ILauncherListener) getActivity();
+                        launcherListener.onLauncherFinished(IsSignedTag.SIGNED);
+                    }
+                }
 
+                @Override
+                public void onNotSignIn() {
+                    if (getActivity() != null && getActivity() instanceof ILauncherListener){
+                        ILauncherListener launcherListener = (ILauncherListener) getActivity();
+                        launcherListener.onLauncherFinished(IsSignedTag.NOT_SIGNED);
+                    }
+                }
+            });
         }
     }
 }

@@ -51,4 +51,6 @@ dependencies {
 
     api 'com.youth.banner:banner:1.4.10'
     api 'com.alibaba:fastjson:1.2.62'
+
+    api 'com.google.android.material:material:1.2.0-alpha03'
 }
