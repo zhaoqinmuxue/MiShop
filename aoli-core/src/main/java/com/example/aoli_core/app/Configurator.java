@@ -1,5 +1,7 @@
 package com.example.aoli_core.app;
 
+import android.app.Activity;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -59,6 +61,21 @@ public class Configurator {
     public final Configurator withInterceptor(Interceptor interceptor){
         INTERCEPTORS.add(interceptor);
         AOLI_CONFIGS.put(ConfigType.INTERCEPTOR,INTERCEPTORS);
+        return this;
+    }
+
+    public final Configurator withWeChatAppId(String appId){
+        AOLI_CONFIGS.put(ConfigType.WE_CHAT_APP_ID,appId);
+        return this;
+    }
+
+    public final Configurator withWeChatAppSecret(String appSecret){
+        AOLI_CONFIGS.put(ConfigType.WE_CHAT_APP_SECRET,appSecret);
+        return this;
+    }
+
+    public final Configurator withActivity(Activity activity){
+        AOLI_CONFIGS.put(ConfigType.ACTIVITY,activity);
         return this;
     }
 

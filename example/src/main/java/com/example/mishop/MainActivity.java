@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.example.aoli_core.activities.ProxyActivity;
+import com.example.aoli_core.app.Aoli;
 import com.example.aoli_core.delegates.AoliDelegate;
 import com.example.aoli_ec.launcher.ILauncherListener;
 import com.example.aoli_ec.launcher.IsSignedTag;
@@ -17,6 +18,7 @@ public class MainActivity extends ProxyActivity implements ILauncherListener, IS
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Aoli.getConfigurator().withActivity(this);
     }
 
     @Override

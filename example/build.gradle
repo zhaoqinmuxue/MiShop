@@ -28,4 +28,5 @@ dependencies {
 
     annotationProcessor project(path: ':aoli-compiler')
     implementation project(path: ':aoli-ec')
+    implementation project(path: ':aoli-annotations')
 }

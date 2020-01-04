@@ -18,6 +18,10 @@ public final class Aoli {
         return (T)getConfigurations().get(type);
     }
 
+    public static Configurator getConfigurator(){
+        return Configurator.getInstance();
+    }
+
     public static Context getApplicationContext(){
         return (Context) getConfiguration(ConfigType.APPLICATION_CONTEXT);
     }

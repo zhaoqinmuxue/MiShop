@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.aoli_core.delegates.AoliDelegate;
+import com.example.aoli_core.wechat.AoliWeChat;
+import com.example.aoli_core.wechat.callbacks.IWeChatSignInCallback;
 import com.example.aoli_ec.R;
 import com.example.aoli_ec.R2;
 import com.google.android.material.textfield.TextInputEditText;
@@ -40,7 +42,12 @@ public class SignInDelegate extends AoliDelegate {
 
     @OnClick(R2.id.icon_sign_in_wechat)
     void onClickWeChat(){
-
+        AoliWeChat.getInstance().onSignSuccess(new IWeChatSignInCallback() {
+            @Override
+            public void onSignInSuccess(String userInfo) {
+                Toast.makeText(getContext(),"登录成功",Toast.LENGTH_LONG).show();
+            }
+        }).signIn();
     }
 
     private boolean checkForm(){
